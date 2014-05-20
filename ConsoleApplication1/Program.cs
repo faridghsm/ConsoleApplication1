@@ -11,42 +11,58 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            int number= 32; // the chosen number
-            int d=16; // the differing value
-
-            System.Console.WriteLine("Choose a number between 1 and 64, when done, press any key!");
-            System.Console.ReadKey();
-
-            for (int i = 0; i < 5; i++ )
+            
+            System.Console.WriteLine("Choose a natural number, when done, type a maximum value!");
+            string userMax = System.Console.ReadLine();
+            int userMaxInt = Convert.ToInt32(userMax);
+            if (userMaxInt % 2 ==1) userMaxInt++;
+            int userNumber = userMaxInt/2;
+            bool errorOccured=false;
+            int numberOfQuestions = Convert.ToInt32(Math.Log(Convert.ToDouble(userMaxInt),2));
+            System.Console.WriteLine("So, I'm going to ask you {0} questions !", numberOfQuestions);
+            for (int logUserMax = 0; logUserMax < numberOfQuestions-1; logUserMax++)
             {
-                System.Console.WriteLine("Is your number > {0}? (y/n)", number);
-                char c = Console.ReadKey().KeyChar; //reads the answer from the user
                 
-                if (c.Equals('y'))
+                System.Console.WriteLine("Is your number greater than {0}? (yes/no)", userNumber);
+                string userInput = System.Console.ReadLine();
+                
+                if (userInput=="yes")
                     {
-                    number = number + d;
-                    d = d / 2;
+                        userMaxInt = userMaxInt / 2 ;
+                        userNumber = userNumber + userMaxInt/2;
+                    }
+                else if (userInput=="no")
+                    {
+                        userMaxInt = userMaxInt / 2 ;
+                        userNumber = userNumber - userMaxInt / 2;
                     }
                 else
                     {
-                    number = number - d;
-                    d = d / 2;
+                        System.Console.WriteLine("Bad Input! Press any key to exit!");
+                        errorOccured = true;
+                        break;
                     }
-                System.Console.WriteLine("\n");
+                
             }
-            
-            System.Console.WriteLine("Is your number {0}?(y/n)", number);
-            char ch = Console.ReadKey().KeyChar;
-            System.Console.WriteLine("\n");
+            if (!errorOccured)
+            {
+                System.Console.WriteLine("Is your number {0}?(yes/no)", userNumber);
+                string userInputFinal = System.Console.ReadLine();
 
-                if (ch.Equals('y'))
+                if (userInputFinal == "yes")
                 {
-                System.Console.WriteLine("Your number is {0}", number);
+                    System.Console.WriteLine("Haha, you regretted! {0}", userNumber);
                 }
-            else
-                System.Console.WriteLine("Your number is {0}", number + 1);
-
+                else if (userInputFinal == "no")
+                    System.Console.WriteLine("So, Your number is {0}", userNumber + 1);
+                else
+                {
+                    System.Console.WriteLine("Bad Input! Press any key to exit!");
+                    errorOccured = true;
+                }
+            }
                 System.Console.ReadKey();
         }
+
     }
 }
