@@ -15,8 +15,8 @@ namespace ConsoleApplication1
             System.Console.WriteLine("Choose a natural number, when done, type a maximum value!");
             string userMax = System.Console.ReadLine();
             int userMaxInt = Convert.ToInt32(userMax);
+            int userNumber = userMaxInt / 2;
             if (userMaxInt % 2 ==1) userMaxInt++;
-            int userNumber = userMaxInt/2;
             bool errorOccured=false;
             int numberOfQuestions = Convert.ToInt32(Math.Log(Convert.ToDouble(userMaxInt),2));
             System.Console.WriteLine("So, I'm going to ask you {0} questions !", numberOfQuestions);
@@ -28,12 +28,12 @@ namespace ConsoleApplication1
                 
                 if (userInput=="yes")
                     {
-                        userMaxInt = userMaxInt / 2 ;
+                        userMaxInt = userMaxInt / 2;
                         userNumber = userNumber + userMaxInt/2;
                     }
                 else if (userInput=="no")
                     {
-                        userMaxInt = userMaxInt / 2 ;
+                        userMaxInt = userMaxInt / 2;
                         userNumber = userNumber - userMaxInt / 2;
                     }
                 else
